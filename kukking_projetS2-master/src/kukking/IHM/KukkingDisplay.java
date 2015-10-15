@@ -192,7 +192,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 				String typeCuisine = searchPage.getTypeCuisine();
 				String typePlat = searchPage.getTypePlat();
 				String cout = searchPage.getCost();
-				displayListReceipts(recipeListPage.listReceipts,application.rechercheRecettes(tempsPrepaMax,typeCuisine, typePlat, cout), new Font("Century Gothic", Font.PLAIN, 18),requestDelete);
+				displayListReceipts(recipeListPage.listReceipts,application.rechercheRecettes(new CriteriaToSearchReceipts(tempsPrepaMax, typeCuisine, typePlat, cout)), new Font("Century Gothic", Font.PLAIN, 18),requestDelete);
 				requestDelete = false;
 				ChangePanel(recipeListPage);
 			}

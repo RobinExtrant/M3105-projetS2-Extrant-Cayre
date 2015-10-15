@@ -133,31 +133,28 @@ public class Application {
 	
 	/**
 	 * to search receipts with parameters
-	 * @param tempsPrepaMax
-	 * @param typeCuisine
-	 * @param typePlat
-	 * @param cout
+	 * @param searchingCriteria TODO
 	 * @return
 	 */
-	public ArrayList<Recipe> rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
+	public ArrayList<Recipe> rechercheRecettes(CriteriaToSearchReceipts searchingCriteria)
 	{
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
 		for (Recipe currentRecipe: receiptsList.list)
 		{
-			if (tempsPrepaMax >= currentRecipe.getPreparationTime())
+			if (searchingCriteria.tempsPrepaMax >= currentRecipe.getPreparationTime())
 			{
 				boolean typeCuisineValide = false;
 				boolean typePlatValide = false;
 				for (String categ: currentRecipe.getCategories())
 				{
-					if (categ.equals(typeCuisine)) typeCuisineValide = true;
-					if (categ.equals(typePlat)) typePlatValide = true;
+					if (categ.equals(searchingCriteria.typeCuisine)) typeCuisineValide = true;
+					if (categ.equals(searchingCriteria.typePlat)) typePlatValide = true;
 				}
-				if (typeCuisine.equals("Tous type de recettes") || typeCuisineValide)
+				if (searchingCriteria.typeCuisine.equals("Tous type de recettes") || typeCuisineValide)
 				{
-					if (typePlat.equals("Tous les plats") || typePlatValide)
+					if (searchingCriteria.typePlat.equals("Tous les plats") || typePlatValide)
 					{
-						if (cout.equals("Variable") || cout.equals(currentRecipe.getCost()))
+						if (searchingCriteria.cout.equals("Variable") || searchingCriteria.cout.equals(currentRecipe.getCost()))
 						{
 							listWellReceipts.add(currentRecipe);
 						}			
