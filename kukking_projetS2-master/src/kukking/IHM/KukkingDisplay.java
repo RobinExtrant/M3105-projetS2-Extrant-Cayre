@@ -238,7 +238,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 					ingredients.add(currentString);
 				}
 				try {
-					application.getReceiptsList().addRecipe(new Recipe(this.formAddRecipePage.getTextAreaNameRecipe(), this.formAddRecipePage.getSliderPeople(), this.formAddRecipePage.getSliderTimePrepare(), this.formAddRecipePage.getSliderTimeCook(), this.formAddRecipePage.getCost(), categories, ingredients, quantities, units, preparation));
+					application.getReceiptsList().addRecipeInReceiptsList(new Recipe(this.formAddRecipePage.getTextAreaNameRecipe(), this.formAddRecipePage.getSliderPeople(), this.formAddRecipePage.getSliderTimePrepare(), this.formAddRecipePage.getSliderTimeCook(), this.formAddRecipePage.getCost(), categories, ingredients, quantities, units, preparation));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -279,7 +279,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 				String nameRecipe = source.getText().substring(0,source.getText().length() - 9);
 				int option = JOptionPane.showConfirmDialog(null,"Etes-vous sur de vouloir supprimer la recette :\n"+ nameRecipe, "Supprimer recette",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (option == JOptionPane.YES_OPTION)
-					this.application.getReceiptsList().permanentlyDeleteRecipe(this.application.getReceiptsList().getRecipeWithName(nameRecipe));
+					this.application.getReceiptsList().permanentlyDeleteRecipeAfterValidation(this.application.getReceiptsList().getRecipeWithName(nameRecipe));
 			}
 			else
 			{

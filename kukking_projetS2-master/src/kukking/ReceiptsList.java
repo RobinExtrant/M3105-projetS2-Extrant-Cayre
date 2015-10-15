@@ -21,21 +21,12 @@ public class ReceiptsList {
 	
 	public ArrayList <Recipe> list;
 
-	/**
-	 * Ne s'effectue que si l'utilisateur a valider la suppression
-	 * @throws IOException 
-	 */
-	public void deleteRecipe(Recipe recipeToDelete) throws IOException {
+	public void askDeleteRecipeToValidation(Recipe recipeToDelete) throws IOException {
 		if (application.getIHMAdmin().ok(recipeToDelete))
-			permanentlyDeleteRecipe(recipeToDelete);
-			
+			permanentlyDeleteRecipeAfterValidation(recipeToDelete);			
 	}
 
-	/**
-	 * to delete recipe
-	 * @param recipeToDelete
-	 */
-	public void permanentlyDeleteRecipe(Recipe recipeToDelete) {
+	public void permanentlyDeleteRecipeAfterValidation(Recipe recipeToDelete) {
 		WritableWorkbook workbook = null;
 		try {
 			workbook = Workbook.createWorkbook(new File(Recipe.sourcePath),Workbook.getWorkbook(new File(Recipe.sourcePath)));
@@ -49,12 +40,12 @@ public class ReceiptsList {
 					}
 				}
 			
-			/* On ecrit le classeur */
+			/* We write in datasheet */
 			workbook.write(); 
 
 		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
 		finally {
-				/* On ferme le worbook pour libérer la mémoire */
+				/* We close workbook to free memory */
 				try {
 					workbook.close();
 				} 
@@ -69,21 +60,11 @@ public class ReceiptsList {
 		this.list.remove(recipeToDelete);
 	}
 
-	/**
-	 * to add recipe
-	 * @param recipeToAdd
-	 * @throws IOException
-	 */
-	public void addRecipe(Recipe recipeToAdd) throws IOException
+	public void addRecipeInReceiptsList(Recipe recipeToAdd) throws IOException
 	{
 		this.list.add(recipeToAdd);
 	}
 
-	/**
-	 * constructor to init receipts list or favoris list
-	 * @param application
-	 * @param favoris
-	 */
 	public ReceiptsList(Application application, boolean favoris) {
 		this.application=application;
 		this.list = new ArrayList<Recipe>();
@@ -99,11 +80,6 @@ public class ReceiptsList {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
 	}
 
-	/**
-	 * to get name of a recipe with the recipe (class)
-	 * @param recipeToSearch
-	 * @return
-	 */
 	public Recipe getRecipeWithName(String recipeToSearch)
 	{
 		for (Recipe recipe: list)
