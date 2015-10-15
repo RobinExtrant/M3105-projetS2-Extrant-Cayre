@@ -26,7 +26,7 @@ public class ReceiptsList {
 	 * @throws IOException 
 	 */
 	public void deleteRecipe(Recipe recipeToDelete) throws IOException {
-		if (application.getAdmin().ok(recipeToDelete))
+		if (application.getIHMAdmin().ok(recipeToDelete))
 			permanentlyDeleteRecipe(recipeToDelete);
 			
 	}

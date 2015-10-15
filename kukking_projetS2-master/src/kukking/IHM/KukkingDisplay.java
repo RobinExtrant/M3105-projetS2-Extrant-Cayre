@@ -169,9 +169,9 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 			
 			else if (source.getText().equals("Se connecter"))
 			{
-				application.valider(connectionPage.getLogin(),
+				application.validatePasswordAccordingToLogin(connectionPage.getLogin(),
 						connectionPage.getPassword());
-				if (application.isAccesAdmin())
+				if (application.userHaveAccesAdmin())
 				{
 					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)dimension.getWidth()-375, 0, 0));
 					messageAdmin.setText("Connecté en tant qu'administrateur");

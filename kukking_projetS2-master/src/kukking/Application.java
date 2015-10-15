@@ -30,26 +30,17 @@ public class Application {
 	private KukkingDisplay kukking;
 
 	private ReceiptsList liste_Favoris;
-	/**
-	 * to get liste favoris
-	 * @return
-	 */
+
 	public ReceiptsList getListe_Favoris() {
 		return liste_Favoris;
 	}
-	/**
-	 * to set liste favoris
-	 * @param liste_Favoris
-	 */
+
 	public void setListe_Favoris(ReceiptsList liste_Favoris) {
 		this.liste_Favoris = liste_Favoris;
 	}
 	
 	private ReceiptsList receiptsList;
-	/**
-	 * to get receiptslist
-	 * @return
-	 */
+
 	public ReceiptsList getReceiptsList() {
 		return receiptsList;
 	}
@@ -57,20 +48,11 @@ public class Application {
 	private Recipe recetteCourante;
 
 	private boolean accesAdmin;
-	/**
-	 * to kwnow if user is connect in mode administrator
-	 * @return
-	 */
-	public boolean isAccesAdmin() {
+
+	public boolean userHaveAccesAdmin() {
 		return accesAdmin;
 	}
 
-	/**
-	 * constructor application which call several init
-	 * @throws RowsExceededException
-	 * @throws WriteException
-	 * @throws IndexOutOfBoundsException
-	 */
 	public Application() throws RowsExceededException, WriteException, IndexOutOfBoundsException
 	{
 		this.user = new UserConsole();
@@ -125,48 +107,27 @@ public class Application {
 		}
 	}
 
-	/**
-	 * to delete favoris
-	 * @param recetteAAsupprimer
-	 * @throws RowsExceededException
-	 * @throws WriteException
-	 */
-	public void supprimerFavori(Recipe recetteAAsupprimer) throws RowsExceededException, WriteException
+	
+	public void deleteRecipeFromFavorisList(Recipe recetteAAsupprimer) throws RowsExceededException, WriteException
 	{
 		recetteAAsupprimer.deleteFavoris();
 		this.liste_Favoris.list.remove(recetteAAsupprimer);
 	}
 
-	/**
-	 * to add favoris
-	 * @param recetteAAjouter
-	 * @throws RowsExceededException
-	 * @throws WriteException
-	 */
-	public void ajouterFavori(Recipe recetteAAjouter) throws RowsExceededException, WriteException
+	public void addRecipeInFavorisList(Recipe recetteAAjouter) throws RowsExceededException, WriteException
 	{
 		recetteAAjouter.setFavoris();
 		this.liste_Favoris.list.add(recetteAAjouter);
 	}
 
-	/**
-	 * display recipe to console
-	 * @param recetteAAfficher
-	 */
-	public void affichageRecette(Recipe recetteAAfficher) {
+	public void displayRecipe(Recipe recetteAAfficher) {
 		user.afficheElementsRecette(recetteAAfficher);
 	}
 
-	/**
-	 * ne s'effectue que si on n'est pas à la première page
-	 */
-	public void pagePrecedente() {
+	public void previousPage() {
 	}
 
-	/**
-	 * ne s'effectue que si on n'est pas à la dernière page.
-	 */
-	public void pageSuivante() {
+	public void followPage() {
 	}
 
 	
@@ -205,25 +166,10 @@ public class Application {
 			}
 		}
 		return listWellReceipts;
-		
-		/*Cette boucle est juste un test
-		for(Recipe currentRecipe: listWellReceipts)
-		{
-			System.out.println (currentRecipe.getNameRecipe());
-		}
-		// Fin de la boucle test*/
 	}
 
-	/*public void requestAdministrativeAccess(String login, String password) throws IOException
-	{
-		if (valider(login, password))
-			user.displayAdministrativePart();
-	}*/
 
-	/**
-	 * valid or not password give in parameter
-	 */
-	public boolean valider(String login, String password) {
+	public boolean validatePasswordAccordingToLogin(String login, String password) {
 		int numLogin = 0;
 		for (String currentLogin:logins)
 		{
@@ -237,11 +183,7 @@ public class Application {
 		return false;
 	}
 
-	/**
-	 * to get IHM_Administrator
-	 * @return
-	 */
-	public IHM_Administrator getAdmin() {
+	public IHM_Administrator getIHMAdmin() {
 		return admin;
 	}
 }
