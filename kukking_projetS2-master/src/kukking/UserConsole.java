@@ -29,27 +29,27 @@ public class UserConsole implements IHM_User {
 	@Override
 	public void displayAllElementsOfRecipe(Recipe recipeToDisplay) {
 		String recipe = recipeToDisplay.getNameRecipe();
-		recipe += "\n" + recipeToDisplay.getNbPers() + " personnes";
-		recipe += "\nTemps de préparation : " + recipeToDisplay.getPreparationTime() + " min";
-		recipe += "\nTemps de cuisson : " + + recipeToDisplay.getCookingTime() + " min";
-		recipe += "\nCout : " + recipeToDisplay.getCost();
+		recipe += "\n" + recipeToDisplay.getAmountOfPersonsOnRecipe() + " personnes";
+		recipe += "\nTemps de préparation : " + recipeToDisplay.getPreparationTimeOnRecipe() + " min";
+		recipe += "\nTemps de cuisson : " + + recipeToDisplay.getCookingTimeOnRecipe() + " min";
+		recipe += "\nCout : " + recipeToDisplay.getCostOnRecipe();
 		recipe += "\nCatégories :\n";
-		for (int numRow=0;numRow<recipeToDisplay.getCategories().size();numRow++)
+		for (int numRow=0;numRow<recipeToDisplay.getCategoriesListOfTheRecipe().size();numRow++)
 		{
-			recipe += "  " + recipeToDisplay.getCategories().get(numRow)+"\n";
+			recipe += "  " + recipeToDisplay.getCategoriesListOfTheRecipe().get(numRow)+"\n";
 		}
 		recipe += "Ingredients :\n";
-		for (int numRow=0;numRow<recipeToDisplay.getIngredients().size();numRow++)
+		for (int numRow=0;numRow<recipeToDisplay.getIngredientsListOfTheRecipe().size();numRow++)
 		{
 			recipe += "- ";
-			if (!recipeToDisplay.getQuantities().get(numRow).equals("")) recipe += recipeToDisplay.getQuantities().get(numRow)+" ";
-			if (!recipeToDisplay.getUnits().get(numRow).equals("")) recipe += recipeToDisplay.getUnits().get(numRow)+" ";
-			recipe += recipeToDisplay.getIngredients().get(numRow)+"\n";
+			if (!recipeToDisplay.getAllIngredientsAmountOfRecipe().get(numRow).equals("")) recipe += recipeToDisplay.getAllIngredientsAmountOfRecipe().get(numRow)+" ";
+			if (!recipeToDisplay.getAllIngredientsUnitsListOfRecipe().get(numRow).equals("")) recipe += recipeToDisplay.getAllIngredientsUnitsListOfRecipe().get(numRow)+" ";
+			recipe += recipeToDisplay.getIngredientsListOfTheRecipe().get(numRow)+"\n";
 		}
 		recipe += "\nPréparation :\n";
-		for (int numRow=0;numRow<recipeToDisplay.getPreparation().size();numRow++)
+		for (int numRow=0;numRow<recipeToDisplay.getStepsPreparationListOfRecipe().size();numRow++)
 		{
-			recipe += "    "+ recipeToDisplay.getPreparation().get(numRow)+"\n";
+			recipe += "    "+ recipeToDisplay.getStepsPreparationListOfRecipe().get(numRow)+"\n";
 		}
 		
 		System.out.println(recipe);

@@ -33,7 +33,7 @@ public class ReceiptsList {
 			
 			for (int indexSheet=0;indexSheet<workbook.getNumberOfSheets();indexSheet++)
 				{
-					if (workbook.getSheet(recipeToDelete.getNameSheetRecipe())==workbook.getSheet(indexSheet))
+					if (workbook.getSheet(recipeToDelete.getNameInDataSheetOfReceipts())==workbook.getSheet(indexSheet))
 					{
 						workbook.removeSheet(indexSheet);
 						break;

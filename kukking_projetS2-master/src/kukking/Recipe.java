@@ -22,20 +22,12 @@ import jxl.write.biff.RowsExceededException;
 public class Recipe {
 	public final static String sourcePath = "./receipts.xls";
 	private String nameSheetRecipe;	
-	/**
-	 * get name of the recipe
-	 * @return
-	 */
-	public String getNameSheetRecipe() {
+	
+	public String getNameInDataSheetOfReceipts() {
 		return nameSheetRecipe;
 	}
 
-	/**
-	 * to set recipe of favoris
-	 * @throws RowsExceededException
-	 * @throws WriteException
-	 */
-	public void setFavoris () throws RowsExceededException, WriteException {
+	public void setRecipeInFavorisInDatasheet() throws RowsExceededException, WriteException {
 		WritableWorkbook workbook = null;
 		try {
 			workbook = Workbook.createWorkbook(new File(sourcePath),Workbook.getWorkbook(new File(sourcePath)));
@@ -45,19 +37,14 @@ public class Recipe {
 			workbook.write();
 		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
 		finally {
-				/* On ferme le worbook pour libérer la mémoire */
+				/* We close worbook to free memory */
 				try {
 					workbook.close();
 				} catch (WriteException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 	
 		}
 	}
 	
-	/**
-	 * to delete recipe of favoris
-	 * @throws RowsExceededException
-	 * @throws WriteException
-	 */
-	public void deleteFavoris () throws RowsExceededException, WriteException {
+	public void deleteRecipeFromFavorisInDatasheet () throws RowsExceededException, WriteException {
 		WritableWorkbook workbook = null;
 		try {
 			workbook = Workbook.createWorkbook(new File(sourcePath),Workbook.getWorkbook(new File(sourcePath)));
@@ -67,17 +54,13 @@ public class Recipe {
 			workbook.write();
 		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
 		finally {
-				/* On ferme le worbook pour libérer la mémoire */
+				/* We close worbook to free memory */
 				try {
 					workbook.close();
 				} catch (WriteException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 	
 		}
 	}
 
-	/**
-	 * to get recipe name
-	 * @return recipe name
-	 */
 	public String getNameRecipe() {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
@@ -86,10 +69,8 @@ public class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return nameSheetRecipe;
 	}
-	/**
-	 * @return quantity of persons
-	 */
-	public int getNbPers() {
+	
+	public int getAmountOfPersonsOnRecipe() {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
@@ -97,10 +78,8 @@ public class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return 0;
 	}
-	/**
-	 * @return preparation time
-	 */
-	public int getPreparationTime() {
+	
+	public int getPreparationTimeOnRecipe() {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
@@ -109,10 +88,7 @@ public class Recipe {
 		return 0;
 	}
 
-	/**
-	 * @return cooking time
-	 */
-	public int getCookingTime() {
+	public int getCookingTimeOnRecipe() {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
@@ -124,10 +100,7 @@ public class Recipe {
 		return 0;
 	}
 
-	/**
-	 * @return recipe's cost
-	 */
-	public String getCost() {
+	public String getCostOnRecipe() {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
@@ -136,10 +109,7 @@ public class Recipe {
 		return "aucun";
 	}
 
-	/**
-	 * @return categories list
-	 */
-	public ArrayList<String> getCategories() {
+	public ArrayList<String> getCategoriesListOfTheRecipe() {
 		ArrayList <String> categories= new ArrayList<String>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
@@ -153,10 +123,7 @@ public class Recipe {
 		return categories;
 	}
 
-	/**
-	 * @return ingredients list
-	 */
-	public ArrayList<String> getIngredients() {
+	public ArrayList<String> getIngredientsListOfTheRecipe() {
 		ArrayList <String> ingredients= new ArrayList<String>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
@@ -170,40 +137,31 @@ public class Recipe {
 		return ingredients;
 	}
 
-	/**
-	 * @return quantities list
-	 */
-	public ArrayList<String> getQuantities() {
+	public ArrayList<String> getAllIngredientsAmountOfRecipe() {
 		ArrayList <String> quantities= new ArrayList<String>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
-			for (int numRow=5;numRow<this.getIngredients().size()+5;numRow++){
+			for (int numRow=5;numRow<this.getIngredientsListOfTheRecipe().size()+5;numRow++){
 				quantities.add(recipe.getCell(1, numRow).getContents());
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return quantities;
 	}
 
-	/**
-	 * @return units list
-	 */
-	public ArrayList<String> getUnits() {
+	public ArrayList<String> getAllIngredientsUnitsListOfRecipe() {
 		ArrayList <String> units= new ArrayList<String>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
-			for (int numRow=5;numRow<this.getIngredients().size()+5;numRow++){
+			for (int numRow=5;numRow<this.getIngredientsListOfTheRecipe().size()+5;numRow++){
 				units.add(recipe.getCell(2, numRow).getContents());
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return units;
 	}
 
-	/**
-	 * @return preparation's steps
-	 */
-	public ArrayList<String> getPreparation() {
+	public ArrayList<String> getStepsPreparationListOfRecipe() {
 		ArrayList <String> preparation= new ArrayList<String>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
@@ -217,12 +175,6 @@ public class Recipe {
 		return preparation;
 	}
 
-
-
-	/**
-	 * constructor to the application's launcher to create receipts from already existing receipts in file
-	 * @param nameRecipe
-	 */
 	public Recipe(String nameRecipe){
 		this.nameSheetRecipe=nameRecipe;
 	}
@@ -328,11 +280,7 @@ public class Recipe {
 		}
 	}
 
-	/**
-	 * to know if the recipe is favoris
-	 * @return
-	 */
-	public boolean isFavoris()
+	public boolean recipeIsFavoris()
 	{
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));

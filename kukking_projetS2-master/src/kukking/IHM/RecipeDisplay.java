@@ -81,7 +81,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=1;
 		gbc.gridwidth=GridBagConstraints.RELATIVE;
 		recipe.add(favoris, gbc);
-		if (recipeToDisplay.isFavoris())
+		if (recipeToDisplay.recipeIsFavoris())
 		{
 			favoris.setSelected(true);
 		}
@@ -92,7 +92,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=1;
 		gbc.gridwidth=1;
 		gbc.anchor = GridBagConstraints.EAST;
-		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getNbPers())),gbc);
+		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getAmountOfPersonsOnRecipe())),gbc);
 		gbc.gridx=8;
 		gbc.gridy=1;
 		gbc.anchor = GridBagConstraints.WEST;
@@ -105,9 +105,9 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=1;
 		recipe.add(ingredient,gbc);
 
-		ArrayList<String> ingre = recipeToDisplay.getIngredients();
-		ArrayList<String> qte = recipeToDisplay.getQuantities();
-		ArrayList<String> unit = recipeToDisplay.getUnits();
+		ArrayList<String> ingre = recipeToDisplay.getIngredientsListOfTheRecipe();
+		ArrayList<String> qte = recipeToDisplay.getAllIngredientsAmountOfRecipe();
+		ArrayList<String> unit = recipeToDisplay.getAllIngredientsUnitsListOfRecipe();
 
 		int i;
 		for (i=0; i<ingre.size();i++){
@@ -143,7 +143,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=6;
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 0, 0, 0);
-		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getPreparationTime())), gbc);
+		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getPreparationTimeOnRecipe())), gbc);
 		gbc.gridx=8;
 		gbc.gridy=6;
 		gbc.anchor = GridBagConstraints.WEST;
@@ -160,7 +160,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=7;
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 0, 0, 0);
-		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getCookingTime())), gbc);
+		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getCookingTimeOnRecipe())), gbc);
 		gbc.gridx=8;
 		gbc.gridy=7;
 		gbc.anchor = GridBagConstraints.WEST;
@@ -177,7 +177,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.gridy=8;
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 0, 0, 0);
-		recipe.add(new JLabel(recipeToDisplay.getCost()), gbc);
+		recipe.add(new JLabel(recipeToDisplay.getCostOnRecipe()), gbc);
 		
 	/* preparation */
 		preparation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -187,7 +187,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.insets = new Insets(5, 0, 0, 0);
 		recipe.add(preparation, gbc);
 		JTextPane listStep = new JTextPane();
-		ArrayList<String> prepa = recipeToDisplay.getPreparation();
+		ArrayList<String> prepa = recipeToDisplay.getStepsPreparationListOfRecipe();
 		int numStep;
 		for( numStep=0; numStep<prepa.size(); numStep++){
 			listStep.setText(listStep.getText()+prepa.get(numStep));
@@ -226,7 +226,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		if (source.isSelected())
 		{
 			try {
-				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).setFavoris();
+				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).setRecipeInFavorisInDatasheet();
 			} catch (WriteException e1) {
 				e1.printStackTrace();
 			}
@@ -234,7 +234,7 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		else
 		{
 			try {
-				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).deleteFavoris();
+				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).deleteRecipeFromFavorisInDatasheet();
 			} catch (WriteException e1) {
 				e1.printStackTrace();
 			}

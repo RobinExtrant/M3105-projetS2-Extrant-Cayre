@@ -110,13 +110,13 @@ public class Application {
 	
 	public void deleteRecipeFromFavorisList(Recipe recetteAAsupprimer) throws RowsExceededException, WriteException
 	{
-		recetteAAsupprimer.deleteFavoris();
+		recetteAAsupprimer.deleteRecipeFromFavorisInDatasheet();
 		this.liste_Favoris.list.remove(recetteAAsupprimer);
 	}
 
 	public void addRecipeInFavorisList(Recipe recetteAAjouter) throws RowsExceededException, WriteException
 	{
-		recetteAAjouter.setFavoris();
+		recetteAAjouter.setRecipeInFavorisInDatasheet();
 		this.liste_Favoris.list.add(recetteAAjouter);
 	}
 
@@ -141,11 +141,11 @@ public class Application {
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
 		for (Recipe currentRecipe: receiptsList.list)
 		{
-			if (searchingCriteria.tempsPrepaMax >= currentRecipe.getPreparationTime())
+			if (searchingCriteria.tempsPrepaMax >= currentRecipe.getPreparationTimeOnRecipe())
 			{
 				boolean typeCuisineValide = false;
 				boolean typePlatValide = false;
-				for (String categ: currentRecipe.getCategories())
+				for (String categ: currentRecipe.getCategoriesListOfTheRecipe())
 				{
 					if (categ.equals(searchingCriteria.typeCuisine)) typeCuisineValide = true;
 					if (categ.equals(searchingCriteria.typePlat)) typePlatValide = true;
@@ -154,7 +154,7 @@ public class Application {
 				{
 					if (searchingCriteria.typePlat.equals("Tous les plats") || typePlatValide)
 					{
-						if (searchingCriteria.cout.equals("Variable") || searchingCriteria.cout.equals(currentRecipe.getCost()))
+						if (searchingCriteria.cout.equals("Variable") || searchingCriteria.cout.equals(currentRecipe.getCostOnRecipe()))
 						{
 							listWellReceipts.add(currentRecipe);
 						}			
