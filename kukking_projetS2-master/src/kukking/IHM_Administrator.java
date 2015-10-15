@@ -9,8 +9,5 @@ import java.io.IOException;
 interface IHM_Administrator {
   boolean ok(Recipe recipeToDelete) throws IOException ;
 
-  /**
-   * donne le formulaire qui permet d'ajouter les données de la recette
-   */
-  Recipe formAddRecipe() throws IOException;
+  Recipe getFormAddRecipe() throws IOException;
 }

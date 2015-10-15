@@ -121,7 +121,7 @@ public class Application {
 	}
 
 	public void displayRecipe(Recipe recetteAAfficher) {
-		user.afficheElementsRecette(recetteAAfficher);
+		user.displayAllElementsOfRecipe(recetteAAfficher);
 	}
 
 	public void previousPage() {

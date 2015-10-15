@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class UserConsole implements IHM_User {
 
 	@Override
-	public int demandeNombrePersonne() {
+	public int askNumberOfPersons() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -27,7 +27,7 @@ public class UserConsole implements IHM_User {
 	}
 
 	@Override
-	public void afficheElementsRecette(Recipe recipeToDisplay) {
+	public void displayAllElementsOfRecipe(Recipe recipeToDisplay) {
 		String recipe = recipeToDisplay.getNameRecipe();
 		recipe += "\n" + recipeToDisplay.getNbPers() + " personnes";
 		recipe += "\nTemps de préparation : " + recipeToDisplay.getPreparationTime() + " min";
@@ -57,7 +57,7 @@ public class UserConsole implements IHM_User {
 	}
 
 	@Override
-	public void afficheListeRecettes(Recipe listeRecettes) {
+	public void displayReceiptsListWithName(Recipe listeRecettes) {
 		// TODO Auto-generated method stub
 
 	}

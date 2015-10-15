@@ -22,7 +22,7 @@ public class AdministratorConsole implements IHM_Administrator {
 	}
 
 	@Override
-	public Recipe formAddRecipe() throws IOException {
+	public Recipe getFormAddRecipe() throws IOException {
 		System.out.println("Titre de la recette ?");
 		BufferedReader entree = new BufferedReader (new InputStreamReader(System.in));
 		String title = entree.readLine();
